@@ -1,125 +1,71 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MainDarwer extends StatelessWidget {
+class MainDrawer extends StatelessWidget {
+  Widget buildListTile(String title, IconData icon) {
+    return ListTile(
+      leading: Icon(
+        icon,
+        size: 25,
+      ),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      onTap: () {
+        //...
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
         children: <Widget>[
           Container(
-            height: double.infinity,
+            color: Color.fromRGBO(0, 10, 10, 0.5),
+            height: 120,
             width: double.infinity,
             padding: EdgeInsets.all(20),
             alignment: Alignment.centerLeft,
-            child: (
-              Icon(Icons.account_circle, size: 25,),
-              Text(
+            child: (Text(
               'Menu Options',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 10,
+                fontSize: 30,
               ),
             )),
           ),
           SizedBox(
             height: 20,
           ),
-          ListTile(
-            leading: Icon(
-              Icons.account_tree_rounded,
-              size: 10,
-            ),
-            title: Text(
-              'New Locality',
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onTap: () {
-              //...
-            },
+          buildListTile(
+            'New Locality',
+            Icons.account_tree_rounded,
           ),
-          ListTile(
-            leading: Icon(
-              Icons.account_tree_rounded,
-              size: 10,
-            ),
-            title: Text(
-              'Add a new volunteer',
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onTap: () {
-              //...
-            },
+          buildListTile(
+            'Add a new volunteer',
+            Icons.accessibility_new,
           ),
-          ListTile(
-            leading: Icon(
-              Icons.account_tree_rounded,
-              size: 10,
-            ),
-            title: Text(
-              'Check Weekly Reports',
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onTap: () {
-              //...
-            },
+          buildListTile(
+            'Check Weekly Reports',
+            Icons.ad_units,
           ),
-          ListTile(
-            leading: Icon(
-              Icons.account_tree_rounded,
-              size: 10,
-            ),
-            title: Text(
-              'Check Today\'s Record',
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onTap: () {
-              //...
-            },
+          buildListTile(
+            'Check Today\'s Record',
+            Icons.account_balance_wallet_rounded,
           ),
-          ListTile(
-            leading: Icon(
-              Icons.account_tree_rounded,
-              size: 10,
-            ),
-            title: Text(
-              'Send Reminders',
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onTap: () {
-              //...
-            },
+          buildListTile(
+            'Send Reminders',
+            Icons.access_alarm,
           ),
-          ListTile(
-            leading: Icon(
-              Icons.account_tree_rounded,
-              size: 10,
-            ),
-            title: Text(
-              'Add New Record',
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onTap: () {
-              //...
-            },
+          buildListTile(
+            'Add New Record',
+            Icons.add,
           ),
         ],
       ),
