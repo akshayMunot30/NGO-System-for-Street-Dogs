@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ngo_system_for_street_dogs/screens/homepage.dart';
 
 import 'package:ngo_system_for_street_dogs/screens/signup.dart';
 
@@ -96,7 +97,14 @@ class _AdminLoginState extends State<AdminLogin> {
                   Container(
                     margin: EdgeInsets.all(8.0),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Homepage(),
+                          ),
+                        );
+                      },
                       child: Text("Login"),
                     ),
                   ),
