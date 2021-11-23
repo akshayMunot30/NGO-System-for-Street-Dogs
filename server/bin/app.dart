@@ -42,7 +42,7 @@ void main(List<String> arguments) async {
     var email = params['email'].toString();
     var password = params['password'].toString();
     var name = params['name'].toString();
-    var locality = params['locality'].toString();
+    var address = params['address'].toString();
     var phone = params['phone'].toString();
 
     // use name, email, password, locality, phone
