@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ngo_system_for_street_dogs/screens/add_newRecord_page.dart';
-import 'package:ngo_system_for_street_dogs/screens/send_reminders_page.dart';
 import 'package:ngo_system_for_street_dogs/screens/signup.dart';
-import 'package:ngo_system_for_street_dogs/screens/today_report_page.dart';
+import 'package:ngo_system_for_street_dogs/screens/record.dart';
 import 'package:ngo_system_for_street_dogs/screens/monthly_reports.dart';
 import '../screens/add_new_locality.dart';
 
@@ -47,28 +46,47 @@ class MainDrawer extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.all(20),
             alignment: Alignment.centerLeft,
-            child: (Text(
+            child: Text(
               'Menu Options',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
               ),
-            )),
+            ),
           ),
           SizedBox(
             height: 20,
           ),
-          buildListTile('New Locality', Icons.account_tree_rounded, context,
-              AddNewLocality()),
-          buildListTile('Add a new volunteer', Icons.accessibility_new, context,
-              SignUp()),
           buildListTile(
-              'Check Weekly Reports', Icons.ad_units, context, WeelkyReports()),
-          buildListTile('Check Today\'s Record',
-              Icons.account_balance_wallet_rounded, context, TodayReport()),
+            'New Locality',
+            Icons.account_tree_rounded,
+            context,
+            AddNewLocality(),
+          ),
           buildListTile(
-              'Send Reminders', Icons.access_alarm, context, SendReminders()),
-          buildListTile('Add New Record', Icons.add, context, AddNewRecord()),
+            'Add a new volunteer',
+            Icons.accessibility_new,
+            context,
+            SignUp(),
+          ),
+          buildListTile(
+            'Check Monthly Report',
+            Icons.ad_units,
+            context,
+            WeelkyReports(),
+          ),
+          buildListTile(
+            'Check Today\'s Record',
+            Icons.account_balance_wallet_rounded,
+            context,
+            TodayReport(),
+          ),
+          buildListTile(
+            'Add New Record',
+            Icons.add,
+            context,
+            AddNewRecord(),
+          ),
         ],
       ),
     );
