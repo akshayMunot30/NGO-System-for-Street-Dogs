@@ -10,7 +10,8 @@ void main(List<String> arguments) async {
 
   await db.open();
   final coll = db.collection('test');
-  final user = db.collection('user');
+  final user = db.collection('User');
+  final admin = db.collection('Admin');
 
   app.get('/testDb', (req, res) async {
     var data = await coll.find().toList();
@@ -23,13 +24,9 @@ void main(List<String> arguments) async {
     var email = params['email'].toString();
     var password = params['password'].toString();
 
-    var data = await user.findOne({"email": email, "password": password});
-
+    var data = await admin.findOne({'email': email, 'password': password});
+    print(data);
     return data;
-
-    // use email and pasword to authenticate
-    // the admin through the admin collection
-    // and return the admins details
   });
 
   app.post('/userLoginWithEmailPassword', (req, res) async {
@@ -37,9 +34,9 @@ void main(List<String> arguments) async {
     final params = parseParamsFromBody(body);
     var email = params['email'].toString();
     var password = params['password'].toString();
-    // use email and pasword to authenticate
-    // the admin through the user collection
-    // and return the admins details
+    var data = await user.findOne({'email': email, 'password': password});
+
+    return data ?? {};
   });
 
   app.post('/createAdmin', (req, res) async {
@@ -50,8 +47,15 @@ void main(List<String> arguments) async {
     var name = params['name'].toString();
     var address = params['address'].toString();
     var phone = params['phone'].toString();
-    // use name, email, password, locality, phone
-    // and add the admin in the admin collections
+
+    // ignore: unawaited_futures
+    admin.insert({
+      'email': email,
+      'name': name,
+      'password': password,
+      'phone': phone,
+      'address': address
+    });
   });
 
   app.post('/createUser', (req, res) async {
@@ -60,11 +64,21 @@ void main(List<String> arguments) async {
     var email = params['email'].toString();
     var password = params['password'].toString();
     var name = params['name'].toString();
-    var address = params['address'].toString();
     var phone = params['phone'].toString();
     var locality_id = params['locality_id'].toString();
-    var user_id =
-        'auto'; // this will be auto increment or auto generated from looking at the database
+
+    var count = (await user.find().toList()).length;
+
+
+    // ignore: unawaited_futures
+    user.insert({
+      'email': email,
+      'locality_id': locality_id,
+      'name': name,
+      'password': password,
+      'phone': phone,
+      'user_id': (count+1).toString()
+    });
 
     // use user_id, name, email, password, locality_id, phone
     // and add the user in the user collections
