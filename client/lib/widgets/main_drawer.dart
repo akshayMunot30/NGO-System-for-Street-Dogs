@@ -1,8 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ngo_system_for_street_dogs/screens/add_newRecord_page.dart';
+import 'package:ngo_system_for_street_dogs/screens/send_reminders_page.dart';
+import 'package:ngo_system_for_street_dogs/screens/signup.dart';
+import 'package:ngo_system_for_street_dogs/screens/today_report_page.dart';
+import 'package:ngo_system_for_street_dogs/screens/weekly_reprets.dart';
+import '../screens/add_new_locality.dart';
 
 class MainDrawer extends StatelessWidget {
-  Widget buildListTile(String title, IconData icon) {
+  void selectCategory(BuildContext ctx, Widget page) {
+    Navigator.of(ctx).push(
+      MaterialPageRoute(
+        builder: (_) {
+          return page;
+        },
+      ),
+    );
+  }
+
+  Widget buildListTile(
+      String title, IconData icon, BuildContext ctx, Widget pa) {
     return ListTile(
       leading: Icon(
         icon,
@@ -15,9 +32,7 @@ class MainDrawer extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onTap: () {
-        //...
-      },
+      onTap: () => selectCategory(ctx, pa),
     );
   }
 
@@ -43,30 +58,17 @@ class MainDrawer extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
+          buildListTile('New Locality', Icons.account_tree_rounded, context,
+              AddNewLocality()),
+          buildListTile('Add a new volunteer', Icons.accessibility_new, context,
+              SignUp()),
           buildListTile(
-            'New Locality',
-            Icons.account_tree_rounded,
-          ),
+              'Check Weekly Reports', Icons.ad_units, context, WeelkyReports()),
+          buildListTile('Check Today\'s Record',
+              Icons.account_balance_wallet_rounded, context, TodayReport()),
           buildListTile(
-            'Add a new volunteer',
-            Icons.accessibility_new,
-          ),
-          buildListTile(
-            'Check Weekly Reports',
-            Icons.ad_units,
-          ),
-          buildListTile(
-            'Check Today\'s Record',
-            Icons.account_balance_wallet_rounded,
-          ),
-          buildListTile(
-            'Send Reminders',
-            Icons.access_alarm,
-          ),
-          buildListTile(
-            'Add New Record',
-            Icons.add,
-          ),
+              'Send Reminders', Icons.access_alarm, context, SendReminders()),
+          buildListTile('Add New Record', Icons.add, context, AddNewRecord()),
         ],
       ),
     );

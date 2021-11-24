@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './screens/add_new_locality.dart';
 
 import 'package:ngo_system_for_street_dogs/screens/adminLogin.dart';
 import 'package:ngo_system_for_street_dogs/screens/volunteerLogin.dart';
@@ -84,15 +85,16 @@ class _MyHomePageState extends State<MyHomePage> {
               Text(
                 "\"DOGS DO SPEAK,\nBUT ONLY TO THOSE,\nWHO KNOW HOW TO LISTEN\"",
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.black54,
-                    fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
+                style: TextStyle(
+                    color: Colors.black54,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic),
               ),
-
               // ElevatedButton(onPressed: ()=>{}), child: Text("Login")),
             ],
           ),
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
