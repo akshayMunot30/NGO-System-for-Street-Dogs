@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:ngo_system_for_street_dogs/models/customInput.dart';
+import 'package:ngo_system_for_street_dogs/widgets/customInput.dart';
 import 'package:ngo_system_for_street_dogs/screens/adminLogin.dart';
 
 class SignUp extends StatefulWidget {
