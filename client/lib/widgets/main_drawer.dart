@@ -4,7 +4,7 @@ import 'package:ngo_system_for_street_dogs/screens/add_newRecord_page.dart';
 import 'package:ngo_system_for_street_dogs/screens/send_reminders_page.dart';
 import 'package:ngo_system_for_street_dogs/screens/signup.dart';
 import 'package:ngo_system_for_street_dogs/screens/today_report_page.dart';
-import 'package:ngo_system_for_street_dogs/screens/weekly_reprets.dart';
+import 'package:ngo_system_for_street_dogs/screens/monthly_reports.dart';
 import '../screens/add_new_locality.dart';
 
 class MainDrawer extends StatelessWidget {
