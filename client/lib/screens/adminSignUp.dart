@@ -12,6 +12,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _fullName = new TextEditingController();
   TextEditingController _phoneNumber = new TextEditingController();
   TextEditingController _address = new TextEditingController();
+  TextEditingController _locality = new TextEditingController();
   TextEditingController _email = new TextEditingController();
   TextEditingController _password = new TextEditingController();
 
@@ -20,7 +21,7 @@ class _SignUpState extends State<SignUp> {
   void _signup() {
     // if (_signupData.createAdmin(
     //     _email, _password, _fullName, _address, _phoneNumber, _address))
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => AdminLogin(),
@@ -155,7 +156,7 @@ class _SignUpState extends State<SignUp> {
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: TextField(
-                      controller: _fullName,
+                      controller: _locality,
                       obscureText: false,
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.emailAddress,
@@ -186,8 +187,6 @@ class _SignUpState extends State<SignUp> {
                     ),
                     child: TextField(
                       controller: _email,
-                      minLines: 1,
-                      maxLines: 4,
                       obscureText: false,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
@@ -217,8 +216,6 @@ class _SignUpState extends State<SignUp> {
                     ),
                     child: TextField(
                       controller: _password,
-                      minLines: 1,
-                      maxLines: 4,
                       obscureText: true,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(

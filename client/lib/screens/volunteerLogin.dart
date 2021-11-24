@@ -18,25 +18,25 @@ class _VolunteerLoginState extends State<VolunteerLogin> {
     verified = await ApiClient().userLoginWithEmailPassword(
         _emailController.text, _passwordController.text);
     print(verified);
-    
-    // if (verified!.isEmpty) {
-    //   showDialog<String>(
-    //     context: context,
-    //     builder: (BuildContext context) => AlertDialog(
-    //       title: const Text(
-    //         'Login Failed',
-    //         style: TextStyle(color: Colors.red),
-    //       ),
-    //       content: const Text('Please enter the correct details'),
-    //       actions: <Widget>[
-    //         TextButton(
-    //           onPressed: () => Navigator.pop(context, 'OK'),
-    //           child: const Text('OK'),
-    //         ),
-    //       ],
-    //     ),
-    //   );
-    // } else {
+
+    if (verified!.isEmpty) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text(
+            'Login Failed',
+            style: TextStyle(color: Colors.red),
+          ),
+          content: const Text('Please enter the correct details'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } else {
       // when login is success
       _emailController.clear();
       _passwordController.clear();
@@ -46,7 +46,8 @@ class _VolunteerLoginState extends State<VolunteerLogin> {
           builder: (context) => VolunteerHome(),
         ),
       );
-    // }
+      // }
+    }
   }
 
   @override
@@ -82,6 +83,7 @@ class _VolunteerLoginState extends State<VolunteerLogin> {
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: TextField(
+                      controller: _emailController,
                       obscureText: false,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
@@ -110,6 +112,7 @@ class _VolunteerLoginState extends State<VolunteerLogin> {
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: TextField(
+                      controller: _passwordController,
                       obscureText: true,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'package:ngo_system_for_street_dogs/screens/homepage_volunteer.dart';
+
+import '../api.dart';
+
 class AddNewRecord extends StatefulWidget {
   @override
   _AddNewRecordState createState() => _AddNewRecordState();
@@ -11,66 +15,100 @@ class _AddNewRecordState extends State<AddNewRecord> {
   DateTime date = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
 
+  TextEditingController _location = new TextEditingController();
+  TextEditingController _date = new TextEditingController();
+  TextEditingController _volunteerId = new TextEditingController();
+  TextEditingController _time = new TextEditingController();
+  TextEditingController _dogsFed = new TextEditingController();
+  TextEditingController _amount = new TextEditingController();
+  TextEditingController _comments = new TextEditingController();
+
+  void _submitReport() {
+    ApiClient().addRecord(_volunteerId.text, _time.text, _dogsFed.text,
+        _amount.text, _comments.text, _location.text, _date.text);
+    _location.clear();
+    _date.clear();
+    _volunteerId.clear();
+    _time.clear();
+    _dogsFed.clear();
+    _amount.clear();
+    _comments.clear();
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => VolunteerHome(),
+        ),
+      );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Add a new Record'),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(7.0),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
-                      ),
-                      width: 170,
-                      margin: EdgeInsets.all(10),
-                      child: DropdownButton<String>(
-                        isExpanded: true,
-                        value: dropDownValue,
-                        icon: const Icon(Icons.arrow_drop_down_outlined),
-                        iconSize: 24,
-                        elevation: 16,
-                        style: const TextStyle(color: Colors.black),
-                        underline: Container(
-                          height: 2,
-                          color: Colors.black,
-                        ),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            dropDownValue = newValue!;
-                          });
-                        },
-                        items: <String>[
-                          'Location',
-                          'Pune',
-                          'Mumbai',
-                          'Amravati'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
+      appBar: AppBar(
+        title: Text('Add a new Record'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF2F2F2),
+                      borderRadius: BorderRadius.circular(7.0),
                     ),
-                    Container(
-                      width: 170,
-                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(7.0),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 5,
+                    ),
+                    width: 170,
+                    margin: EdgeInsets.all(10),
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      value: dropDownValue,
+                      icon: const Icon(Icons.arrow_drop_down_outlined),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.black),
+                      underline: Container(
+                        height: 0.5,
+                        color: Colors.black,
                       ),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          dropDownValue = newValue!;
+                          _location.text = newValue;
+                        });
+                      },
+                      items: <String>['Location', 'Pune', 'Mumbai', 'Amravati']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  Container(
+                    width: 170,
+                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
+                    child: SizedBox(
+                      height: 55,
                       child: TextButton(
-                        style: TextButton.styleFrom(primary: Colors.black, side: BorderSide(color: Colors.black,),),
+                        style: TextButton.styleFrom(
+                          side: BorderSide(style: BorderStyle.solid),
+                          primary: Colors.black,
+                          backgroundColor: Color(0xFFF2F2F2),
+                          shadowColor: Colors.black,
+                          textStyle: TextStyle(
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                         onPressed: () {
                           showDatePicker(
                             context: context,
@@ -80,42 +118,57 @@ class _AddNewRecordState extends State<AddNewRecord> {
                           ).then((value) {
                             setState(() {
                               date = value!;
+                              _date.text =
+                                  DateFormat('dd/MM/yyyy').format(date);
                             });
                           });
                         },
                         child: Text(
-                          DateFormat('yMMMMd').format(date),
+                          DateFormat('dd/MM/yyyy').format(date),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Container(
-                margin: EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          width: 170,
-                          margin: EdgeInsets.only(left: 10),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(7.0),
-                          ),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: "ID",
-                              labelText: "Volunteer ID",
-                            ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        width: 170,
+                        margin: EdgeInsets.only(left: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF2F2F2),
+                          borderRadius: BorderRadius.circular(7.0),
+                        ),
+                        child: TextField(
+                          controller: _volunteerId,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Volunteer ID",
                           ),
                         ),
-                        Container(
-                          width: 170,
-                          margin: EdgeInsets.only(left: 10),
-                          child: ElevatedButton(
+                      ),
+                      Container(
+                        width: 170,
+                        margin: EdgeInsets.only(left: 10),
+                        child: SizedBox(
+                          height: 50,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              side: BorderSide(style: BorderStyle.solid),
+                              primary: Colors.black,
+                              shadowColor: Colors.black,
+                              textStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
                             onPressed: () {
                               showTimePicker(
                                 context: context,
@@ -123,6 +176,7 @@ class _AddNewRecordState extends State<AddNewRecord> {
                               ).then((value) {
                                 setState(() {
                                   time = value!;
+                                  _time.text = value.toString();
                                 });
                               });
                             },
@@ -131,99 +185,88 @@ class _AddNewRecordState extends State<AddNewRecord> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          width: 170,
-                          margin: EdgeInsets.only(left: 10),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(7.0),
-                          ),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: "eg. 1, 2, 3...",
-                              labelText: "Dogs fed",
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 170,
-                          margin: EdgeInsets.only(left: 10),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(7.0),
-                          ),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: "Rs.",
-                              labelText: "Ammount Spent",
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: double.maxFinite,
-                height: 250,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(7.0),
-                ),
-                margin: EdgeInsets.all(20),
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                child: TextField(
-                  maxLines: 10,
-                  decoration: InputDecoration(
-                    hintText:
-                        "Any special AID or note you would like to mention.",
-                    labelText: "Any other Points",
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        //....
-                      },
-                      child: Text("Submit"),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddNewRecord(),
-                          ),
-                        );
-                      },
-                      child: Text("clear"),
-                    ),
+                      ),
+                    ],
                   ),
                 ],
-              )
-            ],
-          ),
-        ));
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        width: 170,
+                        margin: EdgeInsets.only(left: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF2F2F2),
+                          borderRadius: BorderRadius.circular(7.0),
+                        ),
+                        child: TextField(
+                          controller: _dogsFed,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Number of Dogs fed",
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 170,
+                        margin: EdgeInsets.only(left: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF2F2F2),
+                          borderRadius: BorderRadius.circular(7.0),
+                        ),
+                        child: TextField(
+                          controller: _amount,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Ammount Spent",
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              width: double.maxFinite,
+              height: 250,
+              decoration: BoxDecoration(
+                color: Color(0xFFF2F2F2),
+                borderRadius: BorderRadius.circular(7.0),
+              ),
+              margin: EdgeInsets.all(20),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+              child: TextField(
+                controller: _comments,
+                maxLines: 10,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText:
+                      "Any special AID or note you would like to mention.",
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  _submitReport();
+                },
+                child: Text("Submit"),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

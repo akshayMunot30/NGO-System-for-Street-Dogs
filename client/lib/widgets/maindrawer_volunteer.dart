@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ngo_system_for_street_dogs/main.dart';
 import 'package:ngo_system_for_street_dogs/screens/add_newRecord_page.dart';
-import 'package:ngo_system_for_street_dogs/screens/record.dart';
-import 'package:ngo_system_for_street_dogs/screens/monthly_reports.dart';
-import 'package:ngo_system_for_street_dogs/screens/signup.dart';
+
 
 class MainDrawer_volunteer extends StatelessWidget {
   void selectCategory(BuildContext ctx, Widget page) {
@@ -41,14 +39,14 @@ class MainDrawer_volunteer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            color: Color.fromRGBO(0, 10, 10, 0.5),
+            color: Theme.of(context).accentColor,
             height: 120,
             width: double.infinity,
             padding: EdgeInsets.all(20),
             alignment: Alignment.centerLeft,
             child: Text(
               'Menu Options',
-              style: TextStyle(
+              style: TextStyle(color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
               ),
@@ -57,18 +55,7 @@ class MainDrawer_volunteer extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          buildListTile(
-            'Check Monthly Report',
-            Icons.ad_units,
-            context,
-            WeelkyReports(),
-          ),
-          buildListTile(
-            'Check Today\'s Record',
-            Icons.account_balance_wallet_rounded,
-            context,
-            TodayReport(),
-          ),
+          
           buildListTile(
             'Add New Record',
             Icons.add,
@@ -80,6 +67,9 @@ class MainDrawer_volunteer extends StatelessWidget {
           ),
           Divider(
             color: Color.fromRGBO(0, 10, 10, 0.5),
+          ),
+          SizedBox(
+            height: 10,
           ),
           GestureDetector(
             onTap: () {

@@ -23,7 +23,7 @@ class ApiRemoteServer {
     Map request = {'token': token, 'uid': uid, 'rid': rid, 'params': params};
     //printLog(request);
     try {
-      var url = Uri.parse('http://10.0.2.2:3000/$rid');
+      var url = Uri.parse('http://10.0.2.2:3001/$rid');
       var response = await http.post(url, body: json.encode(request));
       // ignore: unrelated_type_equality_checks
       return jsonDecode(response.body);
@@ -35,7 +35,7 @@ class ApiRemoteServer {
 
   Future<dynamic> get(String rid, {int tryingNum = 0}) async {
     try {
-      var url = Uri.parse('http://10.0.2.2:3000/$rid');
+      var url = Uri.parse('http://10.0.2.2:3001/$rid');
       var response = await http.get(url);
       return jsonDecode(response.body);
     } catch (e) {
@@ -103,7 +103,7 @@ class ApiClient {
       String comments,
       String locality_name,
       String date) async {
-    await apiServer.post("createUser", params: {
+    await apiServer.post("addRecord", params: {
       'user_id': user_id,
       'time': time,
       'number_of_dogs': number_of_dogs,

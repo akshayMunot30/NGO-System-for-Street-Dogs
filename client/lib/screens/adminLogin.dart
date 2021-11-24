@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:ngo_system_for_street_dogs/screens/homepage_admin.dart';
 
-import 'package:ngo_system_for_street_dogs/screens/signup.dart';
+import 'package:ngo_system_for_street_dogs/screens/adminSignUp.dart';
 
 import '../api.dart';
 

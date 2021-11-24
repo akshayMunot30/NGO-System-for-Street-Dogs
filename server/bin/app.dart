@@ -36,7 +36,7 @@ void main(List<String> arguments) async {
     final params = parseParamsFromBody(body);
     var email = params['email'].toString();
     var password = params['password'].toString();
-    
+
     var data = await user.findOne({'email': email, 'password': password});
     print(data);
     return data ?? <String, String>{};
@@ -110,6 +110,17 @@ void main(List<String> arguments) async {
       'number_of_dogs': number_of_dogs,
       'month': month
     });
+    print({
+      'user_id': user_id,
+      'date': date,
+      'time': time,
+      'locality_name': locality,
+      'amount_spent': amount_spent,
+      'comments': comments,
+      'number_of_dogs': number_of_dogs,
+      'month': month
+    });
+    return <String, String>{};
   });
 
   app.post('/getRecords', (req, res) async {
@@ -145,7 +156,7 @@ void main(List<String> arguments) async {
     return await locality.find().toList();
   });
 
-  await app.listen(3000); //Listening on port 3001
+  await app.listen(3001); //Listening on port 3001
 }
 
 Map<dynamic, dynamic> parseParamsFromBody(Map<String, dynamic> body) =>
