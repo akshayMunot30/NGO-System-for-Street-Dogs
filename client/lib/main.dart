@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ngo_system_for_street_dogs/api.dart';
 
 import 'package:ngo_system_for_street_dogs/screens/adminLogin.dart';
 import 'package:ngo_system_for_street_dogs/screens/volunteerLogin.dart';
@@ -31,6 +32,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    ApiClient()
+        .adminLoginWithEmailPassword('hemnanisahil777@gmail.com', '********');
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -85,10 +88,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text(
                   "\"DOGS DO SPEAK,\nBUT ONLY TO THOSE,\nWHO KNOW HOW TO LISTEN\"",
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black54,
-                      fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
+                  style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic),
                 ),
-      
+
                 // ElevatedButton(onPressed: ()=>{}), child: Text("Login")),
               ],
             ),
