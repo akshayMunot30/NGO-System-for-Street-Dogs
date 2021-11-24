@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ngo_system_for_street_dogs/widgets/main_drawer.dart';
 import 'package:ngo_system_for_street_dogs/widgets/maindrawer_volunteer.dart';
-import '../widgets/main_drawer.dart';
 
-class Homepage_volunteer extends StatelessWidget {
+
+class VolunteerHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

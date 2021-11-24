@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:ngo_system_for_street_dogs/screens/homepage.dart';
+import 'package:ngo_system_for_street_dogs/screens/homepage_admin.dart';
 
 import 'package:ngo_system_for_street_dogs/screens/signup.dart';
 
@@ -17,8 +17,6 @@ class _AdminLoginState extends State<AdminLogin> {
 
   Map? verified;
   void _login() async {
-    // print(await verification.adminLoginWithEmailPassword(
-    //     _emailController.text, _passwordController.text));
     verified = await ApiClient().adminLoginWithEmailPassword(
         _emailController.text, _passwordController.text);
 

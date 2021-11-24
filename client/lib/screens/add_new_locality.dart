@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ngo_system_for_street_dogs/widgets/main_drawer.dart';
 
 class AddNewLocality extends StatelessWidget {
   static const routName = '/addNewLocality';
@@ -12,6 +13,7 @@ class AddNewLocality extends StatelessWidget {
       appBar: AppBar(
         title: Text('Add a new Locality'),
       ),
+      drawer: MainDrawer(),
       body: SingleChildScrollView(
         child: Container(
           child: Center(

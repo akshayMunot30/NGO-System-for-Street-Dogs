@@ -36,8 +36,9 @@ void main(List<String> arguments) async {
     final params = parseParamsFromBody(body);
     var email = params['email'].toString();
     var password = params['password'].toString();
+    
     var data = await user.findOne({'email': email, 'password': password});
-
+    print(data);
     return data ?? <String, String>{};
   });
 

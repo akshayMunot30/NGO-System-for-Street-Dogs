@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:ngo_system_for_street_dogs/screens/homepage_volunteer.dart';
+
+import '../api.dart';
 
 class VolunteerLogin extends StatefulWidget {
   @override
@@ -7,9 +10,44 @@ class VolunteerLogin extends StatefulWidget {
 }
 
 class _VolunteerLoginState extends State<VolunteerLogin> {
-  // Form Input Field values
-  String _loginEmail = "";
-  String _loginPassword = "";
+  final TextEditingController _emailController = new TextEditingController();
+  final TextEditingController _passwordController = new TextEditingController();
+
+  Map? verified;
+  void _login() async {
+    verified = await ApiClient().userLoginWithEmailPassword(
+        _emailController.text, _passwordController.text);
+    print(verified);
+    
+    if (verified!.isEmpty) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text(
+            'Login Failed',
+            style: TextStyle(color: Colors.red),
+          ),
+          content: const Text('Please enter the correct details'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      // when login is success
+      _emailController.clear();
+      _passwordController.clear();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => VolunteerHome(),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,12 +129,7 @@ class _VolunteerLoginState extends State<VolunteerLogin> {
                   Container(
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Homepage_volunteer(),
-                          ),
-                        );
+                        _login();
                       },
                       child: Text("Login"),
                     ),
