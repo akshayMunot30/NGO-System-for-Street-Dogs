@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-
-import './screens/add_new_locality.dart';
-import 'package:ngo_system_for_street_dogs/api.dart';
-
 import 'package:ngo_system_for_street_dogs/screens/adminLogin.dart';
 import 'package:ngo_system_for_street_dogs/screens/volunteerLogin.dart';
 
@@ -55,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => AdminLogin(),

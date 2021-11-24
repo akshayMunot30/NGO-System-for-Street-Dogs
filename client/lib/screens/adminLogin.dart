@@ -21,10 +21,29 @@ class _AdminLoginState extends State<AdminLogin> {
     //     _emailController.text, _passwordController.text));
     verified = await ApiClient().adminLoginWithEmailPassword(
         _emailController.text, _passwordController.text);
-    if (verified == {}) {
-      print("Error");
+
+    if (verified!.isEmpty) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text(
+            'Login Failed',
+            style: TextStyle(color: Colors.red),
+          ),
+          content: const Text('please enter the correct details'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
     } else {
-      Navigator.push(
+      // when login is success
+      _emailController.clear();
+      _passwordController.clear();
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => Homepage(),

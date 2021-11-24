@@ -28,7 +28,7 @@ void main(List<String> arguments) async {
 
     var data = await admin.findOne({'email': email, 'password': password});
     print(data);
-    return data;
+    return data ?? <String, String>{};
   });
 
   app.post('/userLoginWithEmailPassword', (req, res) async {
@@ -38,7 +38,7 @@ void main(List<String> arguments) async {
     var password = params['password'].toString();
     var data = await user.findOne({'email': email, 'password': password});
 
-    return data ?? {};
+    return data ?? <String, String>{};
   });
 
   app.post('/createAdmin', (req, res) async {
