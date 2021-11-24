@@ -44,11 +44,7 @@ class _VolunteerLoginState extends State<VolunteerLogin> {
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: TextField(
-                      obscureText: true,
-                      onChanged: (value) {
-                        _loginEmail = value;
-                      },
-                      onSubmitted: (String) {},
+                      obscureText: false,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -64,6 +60,7 @@ class _VolunteerLoginState extends State<VolunteerLogin> {
                           color: Colors.black),
                     ),
                   ),
+
                   // Password Input
                   Container(
                     margin: EdgeInsets.symmetric(
@@ -76,8 +73,6 @@ class _VolunteerLoginState extends State<VolunteerLogin> {
                     ),
                     child: TextField(
                       obscureText: true,
-                      onChanged: (value) {},
-                      onSubmitted: (String) {},
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         border: InputBorder.none,
