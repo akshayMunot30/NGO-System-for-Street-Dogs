@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+
 class ApiResponse {
   bool success;
   Map values;
@@ -17,34 +18,25 @@ class ApiRemoteServer {
   int token = 0;
 
   // Send a request to the server and return the response
-  Future<ApiResponse> post(String rid,
+  Future<dynamic> post(String rid,
       {required Map params, String reqType = 'post', int tryingNum = 0}) async {
     Map request = {'token': token, 'uid': uid, 'rid': rid, 'params': params};
     //printLog(request);
     try {
       var url = Uri.parse('http://10.0.2.2:3000/$rid');
       var response = await http.post(url, body: json.encode(request));
-      print(response.body);
-      //printLog(response.statusCode);
-      // Success, return map of json response
-      if (response.statusCode == 200) {
-        return ApiResponse(true, jsonDecode(response.body));
-      }
-      // Failure
-      return ApiResponse(false, Map());
+      return jsonDecode(response.body);
     } catch (e) {
       print(e.toString());
     }
     return ApiResponse(false, Map());
   }
 
-  Future<ApiResponse> get(String rid, {int tryingNum = 0}) async {
+  Future<dynamic> get(String rid, {int tryingNum = 0}) async {
     try {
       var url = Uri.parse('http://10.0.2.2:3000/$rid');
       var response = await http.get(url);
-      if (response.statusCode == 200) {
-        return ApiResponse(true, jsonDecode(response.body));
-      }
+      return jsonDecode(response.body);
     } catch (e) {
       print(e.toString());
     }
@@ -65,20 +57,78 @@ class ApiClient {
 
   late ApiRemoteServer apiServer;
 
-  /// Login Methods
-  /// Normal Login (using Email and password)
-  /// Same for Quick Logins as Well
-  Future<ApiResponse> adminLoginWithEmailPassword(
-      String userEmail, String password) async {
+  Future<Map> adminLoginWithEmailPassword(
+      String adminEmail, String adminPassword) async {
     var response = await apiServer.post("adminLoginWithEmailPassword",
+        params: {'email': adminEmail, 'password': adminPassword});
+    return response as Map;
+  }
+
+  Future<Map> userLoginWithEmailPassword(
+      String userEmail, String password) async {
+    var response = await apiServer.post("userLoginWithEmailPassword",
         params: {'email': userEmail, 'password': password});
-    //printLog(response.success);
-    Map map = response.values;
-    // printLog(map);
-    if (map['status'] == 'success') {
-      return ApiResponse(true, map);
-    } else {
-      return ApiResponse(false, Map());
-    }
+    return response as Map;
+  }
+
+  Future<void> createAdmin(String email, String password, String name,
+      String locality_name, String phone, String address) async {
+    await apiServer.post("createAdmin", params: {
+      'email': email,
+      'password': password,
+      'name': name,
+      'locality_name': locality_name,
+      'phone': phone,
+      'address': address
+    });
+  }
+
+  Future<void> createUser(String email, String password, String name,
+      String locality_name, String phone) async {
+    await apiServer.post("createUser", params: {
+      'email': email,
+      'password': password,
+      'name': name,
+      'locality_name': locality_name,
+      'phone': phone
+    });
+  }
+
+  Future<void> addRecord(
+      String user_id,
+      String time,
+      String number_of_dogs,
+      String amount_spent,
+      String comments,
+      String locality_name,
+      String date) async {
+    await apiServer.post("createUser", params: {
+      'user_id': user_id,
+      'time': time,
+      'number_of_dogs': number_of_dogs,
+      'locality_name': locality_name,
+      'amount_spent': amount_spent,
+      'comments': comments,
+      'date': date
+    });
+  }
+
+  Future<List> getRecords(String locality, String month) async {
+    var response = await apiServer.post("getRecords",
+        params: {'month': month, 'locality_name': locality});
+    return response as List;
+  }
+
+  Future<void> addLocality(String locality_name, String number_of_dogs) async {
+    await apiServer.post("addLocality", params: {
+      'locality_name': locality_name,
+      'estimated_dogs': number_of_dogs
+    });
+  }
+
+  Future<List> getLocality() async {
+    var response = await apiServer.get("getLocalities");
+    print(response);
+    return response as List;
   }
 }

@@ -34,8 +34,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    ApiClient()
-        .adminLoginWithEmailPassword('hemnanisahil777@gmail.com', '********');
+    ApiClient().getLocality();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
