@@ -25,11 +25,12 @@ class ApiRemoteServer {
     try {
       var url = Uri.parse('http://10.0.2.2:3000/$rid');
       var response = await http.post(url, body: json.encode(request));
+      // ignore: unrelated_type_equality_checks
       return jsonDecode(response.body);
     } catch (e) {
       print(e.toString());
     }
-    return ApiResponse(false, Map());
+    return {};
   }
 
   Future<dynamic> get(String rid, {int tryingNum = 0}) async {

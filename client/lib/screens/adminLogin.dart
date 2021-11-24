@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:ngo_system_for_street_dogs/screens/homepage.dart';
 
 import 'package:ngo_system_for_street_dogs/screens/signup.dart';
+
+import '../api.dart';
 
 class AdminLogin extends StatefulWidget {
   @override
@@ -9,9 +12,45 @@ class AdminLogin extends StatefulWidget {
 }
 
 class _AdminLoginState extends State<AdminLogin> {
-  // Form Input Field values
-  String _loginEmail = "";
-  String _loginPassword = "";
+  final TextEditingController _emailController = new TextEditingController();
+  final TextEditingController _passwordController = new TextEditingController();
+
+  Map? verified;
+  void _login() async {
+    // print(await verification.adminLoginWithEmailPassword(
+    //     _emailController.text, _passwordController.text));
+    verified = await ApiClient().adminLoginWithEmailPassword(
+        _emailController.text, _passwordController.text);
+
+    if (verified!.isEmpty) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text(
+            'Login Failed',
+            style: TextStyle(color: Colors.red),
+          ),
+          content: const Text('please enter the correct details'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      // when login is success
+      _emailController.clear();
+      _passwordController.clear();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Homepage(),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +74,7 @@ class _AdminLoginState extends State<AdminLogin> {
                   SizedBox(
                     height: 10,
                   ),
+
                   // Email Id Input
                   Container(
                     margin: EdgeInsets.symmetric(
@@ -46,13 +86,13 @@ class _AdminLoginState extends State<AdminLogin> {
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: TextField(
-                      obscureText: true,
-                      onChanged: (String) {},
-                      onSubmitted: (String) {},
+                      controller: _emailController,
+                      obscureText: false,
                       textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Email ID",
+                        hintText: "Enter Email ID",
                         contentPadding: EdgeInsets.symmetric(
                           horizontal: 24.0,
                           vertical: 20.0,
@@ -64,6 +104,7 @@ class _AdminLoginState extends State<AdminLogin> {
                           color: Colors.black),
                     ),
                   ),
+
                   // Password Input
                   Container(
                     margin: EdgeInsets.symmetric(
@@ -75,9 +116,8 @@ class _AdminLoginState extends State<AdminLogin> {
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: TextField(
+                      controller: _passwordController,
                       obscureText: true,
-                      onChanged: (String) {},
-                      onSubmitted: (String) {},
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -98,12 +138,7 @@ class _AdminLoginState extends State<AdminLogin> {
                     margin: EdgeInsets.all(8.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Homepage(),
-                          ),
-                        );
+                        _login();
                       },
                       child: Text("Login"),
                     ),

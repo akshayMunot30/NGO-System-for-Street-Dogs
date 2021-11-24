@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ngo_system_for_street_dogs/api.dart';
 
-import 'package:ngo_system_for_street_dogs/widgets/customInput.dart';
 import 'package:ngo_system_for_street_dogs/screens/adminLogin.dart';
 
 class SignUp extends StatefulWidget {
@@ -9,6 +9,25 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  TextEditingController _fullName = new TextEditingController();
+  TextEditingController _phoneNumber = new TextEditingController();
+  TextEditingController _address = new TextEditingController();
+  TextEditingController _email = new TextEditingController();
+  TextEditingController _password = new TextEditingController();
+
+  final ApiClient _signupData = new ApiClient();
+
+  void _signup() {
+    // if (_signupData.createAdmin(
+    //     _email, _password, _fullName, _address, _phoneNumber, _address))
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AdminLogin(),
+        ),
+      );
+  }
+
   @override
   Widget build(BuildContext context) {
     // String dropdownValue = "Location";
@@ -33,9 +52,8 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(
                     height: 10,
                   ),
-                  // Email Id Input
-                  CustomInput(hintText: "Full Name", isPasswordField: false),
-                  CustomInput(hintText: "Phone Number", isPasswordField: false),
+
+                  // Full Name Input
                   Container(
                     margin: EdgeInsets.symmetric(
                       horizontal: 24.0,
@@ -46,11 +64,70 @@ class _SignUpState extends State<SignUp> {
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: TextField(
+                      controller: _fullName,
+                      obscureText: false,
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Full Name",
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 24.0,
+                          vertical: 20.0,
+                        ),
+                      ),
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                  ),
+
+                  // Phone Number Input Field
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 24.0,
+                      vertical: 6.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF2F2F2),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: TextField(
+                      controller: _phoneNumber,
+                      obscureText: false,
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Phone Number",
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 24.0,
+                          vertical: 20.0,
+                        ),
+                      ),
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                  ),
+
+                  // Address
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 24.0,
+                      vertical: 6.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF2F2F2),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: TextField(
+                      controller: _address,
                       minLines: 1,
                       maxLines: 4,
                       obscureText: false,
-                      onChanged: (String) {},
-                      onSubmitted: (String) {},
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -66,20 +143,106 @@ class _SignUpState extends State<SignUp> {
                           color: Colors.black),
                     ),
                   ),
-                  CustomInput(hintText: "Email ID", isPasswordField: false),
-                  CustomInput(hintText: "Password", isPasswordField: true),
+
+                  // Locality Name
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 24.0,
+                      vertical: 6.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF2F2F2),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: TextField(
+                      controller: _fullName,
+                      obscureText: false,
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Locality Name",
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 24.0,
+                          vertical: 20.0,
+                        ),
+                      ),
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                  ),
+
+                  // Email ID
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 24.0,
+                      vertical: 6.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF2F2F2),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: TextField(
+                      controller: _email,
+                      minLines: 1,
+                      maxLines: 4,
+                      obscureText: false,
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Enter Email ID",
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 24.0,
+                          vertical: 20.0,
+                        ),
+                      ),
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                  ),
+
+                  // Password Input Field
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 24.0,
+                      vertical: 6.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF2F2F2),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: TextField(
+                      controller: _password,
+                      minLines: 1,
+                      maxLines: 4,
+                      obscureText: true,
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Enter Password",
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 24.0,
+                          vertical: 20.0,
+                        ),
+                      ),
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                  ),
+
                   Container(
                     margin: EdgeInsets.only(
                       top: 20,
                     ),
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AdminLogin(),
-                          ),
-                        );
+                        _signup();
                       },
                       child: Text("Create Account"),
                     ),
