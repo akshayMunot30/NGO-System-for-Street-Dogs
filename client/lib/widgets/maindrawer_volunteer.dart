@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ngo_system_for_street_dogs/main.dart';
 import 'package:ngo_system_for_street_dogs/screens/add_newRecord_page.dart';
-import 'package:ngo_system_for_street_dogs/screens/signup.dart';
 import 'package:ngo_system_for_street_dogs/screens/record.dart';
 import 'package:ngo_system_for_street_dogs/screens/monthly_reports.dart';
-import 'package:ngo_system_for_street_dogs/screens/volunteerLogin.dart';
-import '../screens/add_new_locality.dart';
+import 'package:ngo_system_for_street_dogs/screens/signup.dart';
 
 class MainDrawer_volunteer extends StatelessWidget {
   void selectCategory(BuildContext ctx, Widget page) {
@@ -82,12 +81,36 @@ class MainDrawer_volunteer extends StatelessWidget {
           Divider(
             color: Color.fromRGBO(0, 10, 10, 0.5),
           ),
-          buildListTile(
-            'Log Out',
-            Icons.person,
-            context,
-            VolunteerLogin(),
-          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyHomePage(title: 'Login Page'),
+                ),
+              );
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 20,
+                ),
+                Icon(
+                  Icons.person,
+                  color: Colors.black,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  'Logout',
+                  style: TextStyle(color: Colors.black),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
