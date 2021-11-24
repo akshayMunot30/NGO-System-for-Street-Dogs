@@ -19,24 +19,24 @@ class _VolunteerLoginState extends State<VolunteerLogin> {
         _emailController.text, _passwordController.text);
     print(verified);
     
-    if (verified!.isEmpty) {
-      showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text(
-            'Login Failed',
-            style: TextStyle(color: Colors.red),
-          ),
-          content: const Text('Please enter the correct details'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
-    } else {
+    // if (verified!.isEmpty) {
+    //   showDialog<String>(
+    //     context: context,
+    //     builder: (BuildContext context) => AlertDialog(
+    //       title: const Text(
+    //         'Login Failed',
+    //         style: TextStyle(color: Colors.red),
+    //       ),
+    //       content: const Text('Please enter the correct details'),
+    //       actions: <Widget>[
+    //         TextButton(
+    //           onPressed: () => Navigator.pop(context, 'OK'),
+    //           child: const Text('OK'),
+    //         ),
+    //       ],
+    //     ),
+    //   );
+    // } else {
       // when login is success
       _emailController.clear();
       _passwordController.clear();
@@ -46,7 +46,7 @@ class _VolunteerLoginState extends State<VolunteerLogin> {
           builder: (context) => VolunteerHome(),
         ),
       );
-    }
+    // }
   }
 
   @override

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:ngo_system_for_street_dogs/screens/homepage_admin.dart';
-import 'package:ngo_system_for_street_dogs/screens/homepage_volunteer.dart';
 
 class AddNewRecord extends StatefulWidget {
   @override
@@ -28,11 +26,8 @@ class _AddNewRecordState extends State<AddNewRecord> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7.0),
-                          border: Border.all(
-                            color: Colors.black,
-                            width: 1,
-                          )),
+                        borderRadius: BorderRadius.circular(7.0),
+                      ),
                       padding: EdgeInsets.symmetric(
                         horizontal: 10,
                         vertical: 5,
@@ -70,15 +65,12 @@ class _AddNewRecordState extends State<AddNewRecord> {
                     ),
                     Container(
                       width: 170,
-                      margin: EdgeInsets.only(left: 10),
                       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7.0),
-                          border: Border.all(
-                            color: Colors.black,
-                            width: 1,
-                          )),
-                      child: ElevatedButton(
+                        borderRadius: BorderRadius.circular(7.0),
+                      ),
+                      child: TextButton(
+                        style: TextButton.styleFrom(primary: Colors.black, side: BorderSide(color: Colors.black,),),
                         onPressed: () {
                           showDatePicker(
                             context: context,
@@ -111,11 +103,8 @@ class _AddNewRecordState extends State<AddNewRecord> {
                           padding:
                               EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(7.0),
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 1,
-                              )),
+                            borderRadius: BorderRadius.circular(7.0),
+                          ),
                           child: TextField(
                             decoration: InputDecoration(
                               hintText: "ID",
@@ -159,11 +148,8 @@ class _AddNewRecordState extends State<AddNewRecord> {
                           padding:
                               EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(7.0),
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 1,
-                              )),
+                            borderRadius: BorderRadius.circular(7.0),
+                          ),
                           child: TextField(
                             decoration: InputDecoration(
                               hintText: "eg. 1, 2, 3...",
@@ -177,11 +163,8 @@ class _AddNewRecordState extends State<AddNewRecord> {
                           padding:
                               EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(7.0),
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 1,
-                              )),
+                            borderRadius: BorderRadius.circular(7.0),
+                          ),
                           child: TextField(
                             decoration: InputDecoration(
                               hintText: "Rs.",
@@ -198,11 +181,8 @@ class _AddNewRecordState extends State<AddNewRecord> {
                 width: double.maxFinite,
                 height: 250,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(7.0),
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 1,
-                    )),
+                  borderRadius: BorderRadius.circular(7.0),
+                ),
                 margin: EdgeInsets.all(20),
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                 child: TextField(
