@@ -10,6 +10,7 @@ void main(List<String> arguments) async {
 
   await db.open();
   final coll = db.collection('test');
+  final user = db.collection('user');
 
   app.get('/testDb', (req, res) async {
     var data = await coll.find().toList();
@@ -21,6 +22,11 @@ void main(List<String> arguments) async {
     final params = parseParamsFromBody(body);
     var email = params['email'].toString();
     var password = params['password'].toString();
+
+    var data = await user.findOne({"email": email, "password": password});
+
+    return data;
+
     // use email and pasword to authenticate
     // the admin through the admin collection
     // and return the admins details
@@ -44,7 +50,6 @@ void main(List<String> arguments) async {
     var name = params['name'].toString();
     var address = params['address'].toString();
     var phone = params['phone'].toString();
-
     // use name, email, password, locality, phone
     // and add the admin in the admin collections
   });
