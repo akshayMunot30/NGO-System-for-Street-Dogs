@@ -35,61 +35,63 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Container(
-        child: Center(
-          child: Column(
-            children: [
-              Container(
-                height: 250,
-                child: Image.asset(
-                  'assets/images/front-image.png',
-                  fit: BoxFit.cover,
+      body: SingleChildScrollView(
+        child: Container(
+          child: Center(
+            child: Column(
+              children: [
+                Container(
+                  height: 250,
+                  child: Image.asset(
+                    'assets/images/front-image.png',
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AdminLogin(),
-                    ),
-                  );
-                },
-                child: Text("Login as Admin"),
-              ),
-              Divider(
-                indent: 110,
-                endIndent: 110,
-                height: 50,
-                thickness: 1,
-                color: Colors.black,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => VolunteerLogin(),
-                    ),
-                  );
-                },
-                child: Text("Login as Volunteer"),
-              ),
-              SizedBox(
-                height: 150,
-              ),
-              Text(
-                "\"DOGS DO SPEAK,\nBUT ONLY TO THOSE,\nWHO KNOW HOW TO LISTEN\"",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.black54,
-                    fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
-              ),
-
-              // ElevatedButton(onPressed: ()=>{}), child: Text("Login")),
-            ],
+                SizedBox(
+                  height: 40,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AdminLogin(),
+                      ),
+                    );
+                  },
+                  child: Text("Login as Admin"),
+                ),
+                Divider(
+                  indent: 110,
+                  endIndent: 110,
+                  height: 50,
+                  thickness: 1,
+                  color: Colors.black,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => VolunteerLogin(),
+                      ),
+                    );
+                  },
+                  child: Text("Login as Volunteer"),
+                ),
+                SizedBox(
+                  height: 150,
+                ),
+                Text(
+                  "\"DOGS DO SPEAK,\nBUT ONLY TO THOSE,\nWHO KNOW HOW TO LISTEN\"",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black54,
+                      fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
+                ),
+      
+                // ElevatedButton(onPressed: ()=>{}), child: Text("Login")),
+              ],
+            ),
           ),
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
