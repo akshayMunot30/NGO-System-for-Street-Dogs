@@ -4,6 +4,7 @@ import 'package:ngo_system_for_street_dogs/screens/add_newRecord_page.dart';
 import 'package:ngo_system_for_street_dogs/screens/signup.dart';
 import 'package:ngo_system_for_street_dogs/screens/record.dart';
 import 'package:ngo_system_for_street_dogs/screens/monthly_reports.dart';
+import 'package:ngo_system_for_street_dogs/screens/volunteerLogin.dart';
 import '../screens/add_new_locality.dart';
 
 class MainDrawer_volunteer extends StatelessWidget {
@@ -74,6 +75,18 @@ class MainDrawer_volunteer extends StatelessWidget {
             Icons.add,
             context,
             AddNewRecord(),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Divider(
+            color: Color.fromRGBO(0, 10, 10, 0.5),
+          ),
+          buildListTile(
+            'Log Out',
+            Icons.person,
+            context,
+            VolunteerLogin(),
           ),
         ],
       ),

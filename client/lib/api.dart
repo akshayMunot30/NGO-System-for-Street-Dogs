@@ -61,7 +61,7 @@ class ApiClient {
       String adminEmail, String adminPassword) async {
     var response = await apiServer.post("adminLoginWithEmailPassword",
         params: {'email': adminEmail, 'password': adminPassword});
-    return response as Map;
+    return response ?? {};
   }
 
   Future<Map> userLoginWithEmailPassword(

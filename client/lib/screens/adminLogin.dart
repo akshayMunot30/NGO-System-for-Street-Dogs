@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:ngo_system_for_street_dogs/api.dart';
 import 'package:ngo_system_for_street_dogs/screens/homepage.dart';
 
 import 'package:ngo_system_for_street_dogs/screens/signup.dart';
+
+import '../api.dart';
 
 class AdminLogin extends StatefulWidget {
   @override
@@ -11,20 +12,25 @@ class AdminLogin extends StatefulWidget {
 }
 
 class _AdminLoginState extends State<AdminLogin> {
-
-  // var _loginValidate = adminLoginWithEmailPassword();
-
   final TextEditingController _emailController = new TextEditingController();
   final TextEditingController _passwordController = new TextEditingController();
 
-  void _login() {
-    // if(_emailController.text == )
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Homepage(),
-      ),
-    );
+  Map? verified;
+  void _login() async {
+    // print(await verification.adminLoginWithEmailPassword(
+    //     _emailController.text, _passwordController.text));
+    verified = await ApiClient().adminLoginWithEmailPassword(
+        _emailController.text, _passwordController.text);
+    if (verified == {}) {
+      print("Error");
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Homepage(),
+        ),
+      );
+    }
   }
 
   @override
@@ -112,7 +118,9 @@ class _AdminLoginState extends State<AdminLogin> {
                   Container(
                     margin: EdgeInsets.all(8.0),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _login();
+                      },
                       child: Text("Login"),
                     ),
                   ),
