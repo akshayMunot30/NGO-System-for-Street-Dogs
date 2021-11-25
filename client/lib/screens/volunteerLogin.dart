@@ -83,6 +83,7 @@ class _VolunteerLoginState extends State<VolunteerLogin> {
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: TextField(
+                      keyboardType: TextInputType.emailAddress,
                       controller: _emailController,
                       obscureText: false,
                       textInputAction: TextInputAction.next,

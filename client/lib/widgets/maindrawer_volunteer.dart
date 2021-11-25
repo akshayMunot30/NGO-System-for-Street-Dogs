@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ngo_system_for_street_dogs/main.dart';
-import 'package:ngo_system_for_street_dogs/screens/add_newRecord_page.dart';
-
+import '../main.dart';
+import '../screens/add_newRecord_page.dart';
+import '../screens/homepage_admin.dart';
 
 class MainDrawer_volunteer extends StatelessWidget {
   void selectCategory(BuildContext ctx, Widget page) {
@@ -46,7 +46,8 @@ class MainDrawer_volunteer extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               'Menu Options',
-              style: TextStyle(color: Colors.white,
+              style: TextStyle(
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
               ),
@@ -55,7 +56,15 @@ class MainDrawer_volunteer extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          
+          buildListTile(
+            'Stay Dogs',
+            Icons.home,
+            context,
+            AdminHomepage(),
+          ),
+          SizedBox(
+            height: 10,
+          ),
           buildListTile(
             'Add New Record',
             Icons.add,
@@ -76,7 +85,7 @@ class MainDrawer_volunteer extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyHomePage(title: 'Login Page'),
+                  builder: (context) => MyHomePage(title: 'Stray Dogs'),
                 ),
               );
             },

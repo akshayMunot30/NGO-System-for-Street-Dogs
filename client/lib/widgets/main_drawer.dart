@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ngo_system_for_street_dogs/screens/add_newRecord_page.dart';
-import 'package:ngo_system_for_street_dogs/screens/adminSignUp.dart';
-import 'package:ngo_system_for_street_dogs/screens/record.dart';
-import 'package:ngo_system_for_street_dogs/screens/monthly_reports.dart';
+import 'package:ngo_system_for_street_dogs/screens/homepage_admin.dart';
+import '../screens/addUser.dart';
+import '../screens/homepage_volunteer.dart';
+import '../main.dart';
+import '../screens/add_newRecord_page.dart';
+import '../screens/monthly_reports.dart';
 import '../screens/add_new_locality.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -53,9 +54,13 @@ class MainDrawer extends StatelessWidget {
                 fontSize: 30,
               ),
             ),
-          ),
-          SizedBox(
+          ),SizedBox(
             height: 20,
+          ),buildListTile(
+            'Stay Dogs',
+            Icons.home,
+            context,
+            AdminHomepage(),
           ),
           buildListTile(
             'New Locality',
@@ -67,19 +72,13 @@ class MainDrawer extends StatelessWidget {
             'Add a new volunteer',
             Icons.accessibility_new,
             context,
-            SignUp(),
+            AddVolunteer(),
           ),
           buildListTile(
             'Check Monthly Report',
             Icons.ad_units,
             context,
-            WeelkyReports(),
-          ),
-          buildListTile(
-            'Check Today\'s Record',
-            Icons.account_balance_wallet_rounded,
-            context,
-            TodayReport(),
+            MonthlyReport(),
           ),
           buildListTile(
             'Add New Record',
@@ -87,6 +86,45 @@ class MainDrawer extends StatelessWidget {
             context,
             AddNewRecord(),
           ),
+          SizedBox(
+            height: 10,
+          ),
+          Divider(
+            color: Color.fromRGBO(0, 10, 10, 0.5),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyHomePage(title: 'Login Page'),
+                ),
+              );
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 20,
+                ),
+                Icon(
+                  Icons.person,
+                  color: Colors.black,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  'Logout',
+                  style: TextStyle(color: Colors.black),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

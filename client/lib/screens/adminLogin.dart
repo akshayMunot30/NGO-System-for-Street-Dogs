@@ -44,7 +44,7 @@ class _AdminLoginState extends State<AdminLogin> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Homepage(),
+          builder: (context) => AdminHomepage(),
         ),
       );
     }

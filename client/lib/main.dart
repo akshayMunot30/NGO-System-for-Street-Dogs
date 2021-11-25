@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ngo_system_for_street_dogs/screens/add_newRecord_page.dart';
-import 'package:ngo_system_for_street_dogs/screens/adminLogin.dart';
-import 'package:ngo_system_for_street_dogs/screens/monthly_reports.dart';
-import 'package:ngo_system_for_street_dogs/screens/volunteerLogin.dart';
+import '../screens/adminLogin.dart';
+import '../screens/volunteerLogin.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,8 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Login Page',
-      home: AddNewRecord(),
+      home: MyHomePage(
+        title: 'Stray Dogs',
+      ),
     );
   }
 }
@@ -71,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => VolunteerLogin(),

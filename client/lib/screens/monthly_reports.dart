@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:ngo_system_for_street_dogs/api.dart';
 import 'package:ngo_system_for_street_dogs/widgets/main_drawer.dart';
 
-class WeelkyReports extends StatefulWidget {
+class MonthlyReport extends StatefulWidget {
   @override
-  _WeelkyReportsState createState() => _WeelkyReportsState();
+  _MonthlyReportState createState() => _MonthlyReportState();
 }
 
-class _WeelkyReportsState extends State<WeelkyReports> {
+class _MonthlyReportState extends State<MonthlyReport> {
   List data = [];
   List users = <String>[];
   int dogCount = 0;
