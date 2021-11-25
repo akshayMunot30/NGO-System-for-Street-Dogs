@@ -11,9 +11,21 @@ class AddNewRecord extends StatefulWidget {
 }
 
 class _AddNewRecordState extends State<AddNewRecord> {
-  String dropDownValue = "Location";
+  String dropDownValue = "Pune";
+  var localities = <String>['Pune'];
   DateTime date = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
+
+  @override
+  void initState() {
+    super.initState();
+    ApiClient().getLocality().then((value) {
+      setState(() {
+        localities=value;
+        localities.remove('all');
+      });
+    });
+  }
 
   TextEditingController _location = new TextEditingController();
   TextEditingController _date = new TextEditingController();
@@ -34,11 +46,11 @@ class _AddNewRecordState extends State<AddNewRecord> {
     _amount.clear();
     _comments.clear();
     Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => VolunteerHome(),
-        ),
-      );
+      context,
+      MaterialPageRoute(
+        builder: (context) => VolunteerHome(),
+      ),
+    );
   }
 
   @override
@@ -82,7 +94,7 @@ class _AddNewRecordState extends State<AddNewRecord> {
                           _location.text = newValue;
                         });
                       },
-                      items: <String>['Location', 'Pune', 'Mumbai', 'Amravati']
+                      items: localities
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,

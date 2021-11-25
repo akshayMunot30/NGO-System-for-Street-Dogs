@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ngo_system_for_street_dogs/screens/add_newRecord_page.dart';
 import 'package:ngo_system_for_street_dogs/screens/adminLogin.dart';
 import 'package:ngo_system_for_street_dogs/screens/monthly_reports.dart';
 import 'package:ngo_system_for_street_dogs/screens/volunteerLogin.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Login Page',
-      home: WeelkyReports(),
+      home: AddNewRecord(),
     );
   }
 }
