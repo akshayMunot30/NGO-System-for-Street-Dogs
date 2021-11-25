@@ -127,9 +127,12 @@ class ApiClient {
     });
   }
 
-  Future<List> getLocality() async {
+  Future<List<String>> getLocality() async {
     var response = await apiServer.get("getLocalities");
-    print(response);
-    return response as List;
+    var newResponse = <String>[];
+    (response as List).forEach((element) { 
+        newResponse.add(element['locality_name'].toString());
+    });
+    return newResponse;
   }
 }

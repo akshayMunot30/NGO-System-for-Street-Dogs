@@ -16,6 +16,7 @@ class _WeelkyReportsState extends State<WeelkyReports> {
   @override
   void initState() {
     super.initState();
+    ApiClient().getLocality().then((value) => localities = value);
     ApiClient().getRecords('all', 'all').then((value) {
       data = value;
       setState(() {
@@ -23,31 +24,36 @@ class _WeelkyReportsState extends State<WeelkyReports> {
           if (!users.contains(element['user_id'].toString())) {
             users.add(element['user_id'].toString());
           }
-          dogCount=dogCount + int.parse(element['number_of_dogs'].toString());
-          amount=amount+ int.parse(element['amount_spent'].toString());
+          dogCount = dogCount + int.parse(element['number_of_dogs'].toString());
+          amount = amount + int.parse(element['amount_spent'].toString());
         });
-        print(users);
-        print('No of users: ' + users.length.toString());
-        print('Money: '+ amount.toString());
-        print('Dogs: '+dogCount.toString());
-
       });
     });
   }
 
-  String selectedLocality = 'Apple';
-  String selectedMonth = '11/2021';
+  String selectedLocality = 'all';
+  String selectedMonth = 'all';
   List<String> entries = <String>['A', 'B', 'C', 'D', 'E'];
 
-  var localities = [
-    'Apple',
-    'Banana',
-    'Grapes',
-    'Orange',
-    'watermelon',
-    'Pineapple'
+  var localities = ['all'];
+  var months = [
+    'all',
+    '01/2021',
+    '02/2021',
+    '03/2021',
+    '04/2021',
+    '05/2021',
+    '06/2021',
+    '07/2021',
+    '08/2021',
+    '09/2021',
+    '10/2021',
+    '11/2021',
+    '12/2021',
+    '01/2022',
+    '02/2022',
+    '03/2022'
   ];
-  var months = ['11/2021', '12/2021', '01/2022', '02/2022', '03/2022'];
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +91,30 @@ class _WeelkyReportsState extends State<WeelkyReports> {
                                   value: items, child: Text(items));
                             }).toList(),
                             onChanged: (String? newValue) {
-                              setState(() {
-                                selectedLocality = newValue!;
+                              selectedLocality = newValue!;
+                              // set all count to 0 and then update
+                              data = [];
+                              users = <String>[];
+                              dogCount = 0;
+                              amount = 0;
+                              ApiClient()
+                                  .getRecords(selectedLocality, selectedMonth)
+                                  .then((value) {
+                                data = value;
+                                setState(() {
+                                  data.forEach((element) {
+                                    if (!users.contains(
+                                        element['user_id'].toString())) {
+                                      users.add(element['user_id'].toString());
+                                    }
+                                    dogCount = dogCount +
+                                        int.parse(element['number_of_dogs']
+                                            .toString());
+                                    amount = amount +
+                                        int.parse(
+                                            element['amount_spent'].toString());
+                                  });
+                                });
                               });
                             },
                           ),
@@ -116,6 +144,31 @@ class _WeelkyReportsState extends State<WeelkyReports> {
                             onChanged: (String? newValue) {
                               setState(() {
                                 selectedMonth = newValue!;
+                                // set all count to 0 and then update
+                                data = [];
+                                users = <String>[];
+                                dogCount = 0;
+                                amount = 0;
+                                ApiClient()
+                                    .getRecords(selectedLocality, selectedMonth)
+                                    .then((value) {
+                                  data = value;
+                                  setState(() {
+                                    data.forEach((element) {
+                                      if (!users.contains(
+                                          element['user_id'].toString())) {
+                                        users
+                                            .add(element['user_id'].toString());
+                                      }
+                                      dogCount = dogCount +
+                                          int.parse(element['number_of_dogs']
+                                              .toString());
+                                      amount = amount +
+                                          int.parse(element['amount_spent']
+                                              .toString());
+                                    });
+                                  });
+                                });
                               });
                             },
                           ),
@@ -179,7 +232,7 @@ class _WeelkyReportsState extends State<WeelkyReports> {
                         height: 30,
                         decoration: BoxDecoration(border: Border.all()),
                         child: Text(
-                          amount.toString()+"/-",
+                          amount.toString() + "/-",
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
@@ -204,8 +257,8 @@ class _WeelkyReportsState extends State<WeelkyReports> {
                     width: 10,
                   ),
                   Container(
-                    height: 300,
-                    width: 200,
+                    height: 250,
+                    width: 150,
                     decoration: BoxDecoration(border: Border.all()),
                     child: ListView.separated(
                       padding: const EdgeInsets.all(2),
@@ -213,7 +266,8 @@ class _WeelkyReportsState extends State<WeelkyReports> {
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                           height: 30,
-                          child: Center(child: Text('user with id: ${users[index]}')),
+                          child: Center(
+                              child: Text('user with id: ${users[index]}')),
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) =>
