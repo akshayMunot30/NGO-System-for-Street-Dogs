@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ngo_system_for_street_dogs/api.dart';
+import 'package:ngo_system_for_street_dogs/screens/homepage_admin.dart';
 import 'package:ngo_system_for_street_dogs/widgets/main_drawer.dart';
 
 class AddNewLocality extends StatelessWidget {
@@ -8,6 +10,36 @@ class AddNewLocality extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController _newLocality = new TextEditingController();
     TextEditingController _estimatedDogs = new TextEditingController();
+
+    void _addLocality() {
+      ApiClient().addLocality(_newLocality.text, _estimatedDogs.text);
+      _newLocality.clear();
+      _estimatedDogs.clear();
+      showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text(
+          'Added Successfully',
+          style: TextStyle(color: Colors.green),
+        ),
+        content: const Text('New Locality has been added successfully!'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context, 'OK');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AdminHomepage(),
+                ),
+              );
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -43,7 +75,7 @@ class AddNewLocality extends StatelessWidget {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "Address",
+                      hintText: "New Locality",
                       contentPadding: EdgeInsets.symmetric(
                         horizontal: 24.0,
                         vertical: 20.0,
@@ -71,6 +103,7 @@ class AddNewLocality extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: TextField(
+                    keyboardType: TextInputType.number,
                     controller: _estimatedDogs,
                     minLines: 1,
                     maxLines: 4,
@@ -78,7 +111,7 @@ class AddNewLocality extends StatelessWidget {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "Address",
+                      hintText: "Estimated Number of Dogs.",
                       contentPadding: EdgeInsets.symmetric(
                         horizontal: 24.0,
                         vertical: 20.0,
@@ -95,7 +128,9 @@ class AddNewLocality extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.all(15),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _addLocality();
+                    },
                     child: Text("Add Locality"),
                   ),
                 ),

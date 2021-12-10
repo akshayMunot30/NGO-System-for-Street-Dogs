@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ngo_system_for_street_dogs/screens/homepage_admin.dart';
-import '../screens/addUser.dart';
-import '../screens/homepage_volunteer.dart';
+
 import '../main.dart';
-import '../screens/add_newRecord_page.dart';
+import '../screens/adminSignUp.dart';
+import '../screens/homepage_admin.dart';
+import '../screens/addUser.dart';
 import '../screens/monthly_reports.dart';
 import '../screens/add_new_locality.dart';
 
@@ -42,21 +42,23 @@ class MainDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            color: Color.fromRGBO(0, 10, 10, 0.5),
+            color: Theme.of(context).accentColor,
             height: 120,
             width: double.infinity,
             padding: EdgeInsets.all(20),
             alignment: Alignment.centerLeft,
             child: Text(
               'Menu Options',
-              style: TextStyle(
+              style: TextStyle(color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
               ),
             ),
-          ),SizedBox(
+          ),
+          SizedBox(
             height: 20,
-          ),buildListTile(
+          ),
+          buildListTile(
             'Stay Dogs',
             Icons.home,
             context,
@@ -69,7 +71,7 @@ class MainDrawer extends StatelessWidget {
             AddNewLocality(),
           ),
           buildListTile(
-            'Add a new volunteer',
+            'Add a New volunteer',
             Icons.accessibility_new,
             context,
             AddVolunteer(),
@@ -81,10 +83,10 @@ class MainDrawer extends StatelessWidget {
             MonthlyReport(),
           ),
           buildListTile(
-            'Add New Record',
-            Icons.add,
+            'Add a New Admin',
+            Icons.person,
             context,
-            AddNewRecord(),
+            SignUp(),
           ),
           SizedBox(
             height: 10,
@@ -112,15 +114,15 @@ class MainDrawer extends StatelessWidget {
                   width: 20,
                 ),
                 Icon(
-                  Icons.person,
-                  color: Colors.black,
+                  Icons.logout,
+                  color: Colors.black54,
                 ),
                 SizedBox(
                   width: 20,
                 ),
                 Text(
                   'Logout',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                 )
               ],
             ),

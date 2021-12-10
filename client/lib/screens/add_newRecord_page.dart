@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'package:ngo_system_for_street_dogs/screens/homepage_volunteer.dart';
+import 'package:ngo_system_for_street_dogs/widgets/maindrawer_volunteer.dart';
 
 import '../api.dart';
 
@@ -21,7 +22,7 @@ class _AddNewRecordState extends State<AddNewRecord> {
     super.initState();
     ApiClient().getLocality().then((value) {
       setState(() {
-        localities=value;
+        localities = value;
         localities.remove('all');
       });
     });
@@ -45,10 +46,28 @@ class _AddNewRecordState extends State<AddNewRecord> {
     _dogsFed.clear();
     _amount.clear();
     _comments.clear();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => VolunteerHome(),
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text(
+          'Added Successfully',
+          style: TextStyle(color: Colors.green),
+        ),
+        content: const Text('New Record has been Added!'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context, 'OK');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => VolunteerHome(),
+                ),
+              );
+            },
+            child: const Text('OK'),
+          ),
+        ],
       ),
     );
   }
@@ -59,6 +78,7 @@ class _AddNewRecordState extends State<AddNewRecord> {
       appBar: AppBar(
         title: Text('Add a new Record'),
       ),
+      drawer: MainDrawer_volunteer(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -152,7 +172,7 @@ class _AddNewRecordState extends State<AddNewRecord> {
                     children: [
                       Container(
                         width: 170,
-                        margin: EdgeInsets.only(left: 10),
+                        margin: EdgeInsets.fromLTRB(10, 0, 5, 10),
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                         decoration: BoxDecoration(
@@ -168,15 +188,20 @@ class _AddNewRecordState extends State<AddNewRecord> {
                         ),
                       ),
                       Container(
+                        margin: EdgeInsets.fromLTRB(5, 0, 10, 10),
                         width: 170,
-                        margin: EdgeInsets.only(left: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(7.0),
+                        ),
                         child: SizedBox(
                           height: 50,
                           child: TextButton(
                             style: TextButton.styleFrom(
                               side: BorderSide(style: BorderStyle.solid),
                               primary: Colors.black,
-                              shadowColor: Colors.black,
+                              backgroundColor: Color(0xFFF2F2F2),
                               textStyle: TextStyle(
                                 fontWeight: FontWeight.w400,
                               ),

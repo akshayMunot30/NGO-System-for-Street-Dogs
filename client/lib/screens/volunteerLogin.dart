@@ -40,12 +40,31 @@ class _VolunteerLoginState extends State<VolunteerLogin> {
       // when login is success
       _emailController.clear();
       _passwordController.clear();
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => VolunteerHome(),
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text(
+            'Login Successful',
+            style: TextStyle(color: Colors.green),
+          ),
+          content: const Text('You have been logged in successfully. Welcome!'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, 'OK');
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => VolunteerHome(),
+                  ),
+                );
+              },
+              child: const Text('OK'),
+            ),
+          ],
         ),
       );
+
       // }
     }
   }

@@ -85,7 +85,7 @@ class MainDrawer_volunteer extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyHomePage(title: 'Stray Dogs'),
+                  builder: (context) => MyHomePage(title: 'Stay Dogs'),
                 ),
               );
             },
@@ -97,15 +97,15 @@ class MainDrawer_volunteer extends StatelessWidget {
                   width: 20,
                 ),
                 Icon(
-                  Icons.person,
-                  color: Colors.black,
+                  Icons.logout,
+                  color: Colors.black54
                 ),
                 SizedBox(
                   width: 20,
                 ),
                 Text(
                   'Logout',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                 )
               ],
             ),

@@ -44,7 +44,7 @@ class _AddVolunteerState extends State<AddVolunteer> {
       builder: (BuildContext context) => AlertDialog(
         title: const Text(
           'User Created Successfully!!',
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(color: Colors.green),
         ),
         content: const Text('The User can now login trhough Vlunteer Login'),
         actions: <Widget>[
@@ -222,6 +222,7 @@ class _AddVolunteerState extends State<AddVolunteer> {
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: TextField(
+                    keyboardType: TextInputType.visiblePassword,
                     controller: _password,
                     obscureText: true,
                     textInputAction: TextInputAction.next,

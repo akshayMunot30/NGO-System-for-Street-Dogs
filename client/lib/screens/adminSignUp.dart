@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ngo_system_for_street_dogs/api.dart';
 
 import 'package:ngo_system_for_street_dogs/screens/adminLogin.dart';
+import 'package:ngo_system_for_street_dogs/widgets/main_drawer.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -16,17 +17,39 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _email = new TextEditingController();
   TextEditingController _password = new TextEditingController();
 
-  final ApiClient _signupData = new ApiClient();
-
   void _signup() {
-    // if (_signupData.createAdmin(
-    //     _email, _password, _fullName, _address, _phoneNumber, _address))
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AdminLogin(),
+    ApiClient().createAdmin(_email.text, _password.text, _fullName.text,
+        _locality.text, _phoneNumber.text, _address.text);
+    _email.clear();
+    _password.clear();
+    _fullName.clear();
+    _locality.clear();
+    _phoneNumber.clear();
+    _address.clear();
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text(
+          'Created Successfully',
+          style: TextStyle(color: Colors.green),
         ),
-      );
+        content: const Text('Volunteer has been added successfully!'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context, 'OK');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AdminLogin(),
+                ),
+              );
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -37,6 +60,7 @@ class _SignUpState extends State<SignUp> {
       appBar: AppBar(
         title: Text("Create Admin Account"),
       ),
+      drawer: MainDrawer(),
       body: ListView(
         children: [
           Container(
@@ -98,7 +122,7 @@ class _SignUpState extends State<SignUp> {
                       controller: _phoneNumber,
                       obscureText: false,
                       textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Phone Number",
@@ -159,7 +183,6 @@ class _SignUpState extends State<SignUp> {
                       controller: _locality,
                       obscureText: false,
                       textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Locality Name",
@@ -186,6 +209,7 @@ class _SignUpState extends State<SignUp> {
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: TextField(
+                      keyboardType: TextInputType.emailAddress,
                       controller: _email,
                       obscureText: false,
                       textInputAction: TextInputAction.next,
@@ -215,6 +239,7 @@ class _SignUpState extends State<SignUp> {
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: TextField(
+                      keyboardType: TextInputType.visiblePassword,
                       controller: _password,
                       obscureText: true,
                       textInputAction: TextInputAction.next,
@@ -244,37 +269,6 @@ class _SignUpState extends State<SignUp> {
                       child: Text("Create Account"),
                     ),
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //   children: [
-                  //     Container(
-                  //       margin: EdgeInsets.all(10.0),
-                  //       child: DropdownButton<String>(
-                  //         value: dropdownValue,
-                  //         icon: const Icon(Icons.arrow_drop_down_outlined),
-                  //         iconSize: 24,
-                  //         elevation: 16,
-                  //         style: const TextStyle(color: Colors.black),
-                  //         underline: Container(
-                  //           height: 2,
-                  //           color: Colors.black,
-                  //         ),
-                  //         onChanged: (String? newValue) {
-                  //           setState(() {
-                  //             dropdownValue = newValue!;
-                  //           });
-                  //         },
-                  //         items: <String>['Location', 'Two', 'Free', 'Four']
-                  //             .map<DropdownMenuItem<String>>((String value) {
-                  //           return DropdownMenuItem<String>(
-                  //             value: value,
-                  //             child: Text(value),
-                  //           );
-                  //         }).toList(),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
                 ],
               ),
             ),

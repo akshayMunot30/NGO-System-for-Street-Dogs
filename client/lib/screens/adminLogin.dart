@@ -28,7 +28,7 @@ class _AdminLoginState extends State<AdminLogin> {
             'Login Failed',
             style: TextStyle(color: Colors.red),
           ),
-          content: const Text('please enter the correct details'),
+          content: const Text('Please enter the correct details'),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.pop(context, 'OK'),
@@ -41,10 +41,28 @@ class _AdminLoginState extends State<AdminLogin> {
       // when login is success
       _emailController.clear();
       _passwordController.clear();
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AdminHomepage(),
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text(
+            'Login Successful!',
+            style: TextStyle(color: Colors.green),
+          ),
+          content: const Text('You have been logged in Successfuly!'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, 'OK');
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AdminHomepage(),
+                  ),
+                );
+              },
+              child: const Text('OK'),
+            ),
+          ],
         ),
       );
     }
@@ -114,6 +132,7 @@ class _AdminLoginState extends State<AdminLogin> {
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: TextField(
+                      keyboardType: TextInputType.visiblePassword,
                       controller: _passwordController,
                       obscureText: true,
                       textInputAction: TextInputAction.next,
@@ -146,20 +165,12 @@ class _AdminLoginState extends State<AdminLogin> {
                     height: 80,
                   ),
                   Text(
-                    "If you don't have an account, signup!",
+                    "\"LOTS OF PEOPLE TALK TO ANIMALS,\nBUT NOT MANY LISTEN THOUGH,\nAND THAT'S THE PROBLEM\"",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignUp(),
-                        ),
-                      );
-                    },
-                    child: Text("Create Account"),
+                    style: TextStyle(
+                        color: Colors.black54,
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic),
                   ),
                 ],
               ),

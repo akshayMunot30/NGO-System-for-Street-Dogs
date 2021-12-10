@@ -208,7 +208,7 @@ class _MonthlyReportState extends State<MonthlyReport> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('No. of dogs fed', style: TextStyle(fontSize: 15)),
+                      Text('No. of dogs fed', style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
                       SizedBox(
                         height: 5,
                       ),
@@ -218,12 +218,12 @@ class _MonthlyReportState extends State<MonthlyReport> {
                         decoration: BoxDecoration(border: Border.all()),
                         child: Text(
                           dogCount.toString(),
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 15),
                         ),
                       ),
                       SizedBox(height: 20),
                       Text('Total Amount Spent',
-                          style: TextStyle(fontSize: 15)),
+                          style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
                       SizedBox(
                         height: 5,
                       ),
@@ -233,12 +233,12 @@ class _MonthlyReportState extends State<MonthlyReport> {
                         decoration: BoxDecoration(border: Border.all()),
                         child: Text(
                           amount.toString() + "/-",
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 15),
                         ),
                       ),
                       SizedBox(height: 20),
                       Text('Volunteers Involved',
-                          style: TextStyle(fontSize: 15)),
+                          style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
                       SizedBox(
                         height: 5,
                       ),
@@ -248,7 +248,7 @@ class _MonthlyReportState extends State<MonthlyReport> {
                         decoration: BoxDecoration(border: Border.all()),
                         child: Text(
                           users.length.toString(),
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 15),
                         ),
                       ),
                     ],
