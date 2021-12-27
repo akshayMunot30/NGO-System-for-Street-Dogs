@@ -102,7 +102,7 @@ class MainDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyHomePage(title: 'Login Page'),
+                  builder: (context) => MyHomePage(title: 'Stay Dogs'),
                 ),
               );
             },

@@ -75,9 +75,10 @@ class _MonthlyReportState extends State<MonthlyReport> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    width: 140,
                     decoration: BoxDecoration(
-                      border: Border.all(),
-                    ),
+                        color: Color(0xFFF2F2F2),
+                        borderRadius: BorderRadius.circular(7.0)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -123,11 +124,13 @@ class _MonthlyReportState extends State<MonthlyReport> {
                     ),
                   ),
                   SizedBox(
-                    width: 80,
+                    width: 30,
                   ),
                   Container(
+                    width: 140,
                     decoration: BoxDecoration(
-                      border: Border.all(),
+                      color: Color(0xFFF2F2F2),
+                      borderRadius: BorderRadius.circular(7.0),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -181,7 +184,7 @@ class _MonthlyReportState extends State<MonthlyReport> {
 
               ///`************************************************`///
               SizedBox(
-                height: 20,
+                height: 40,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -199,7 +202,7 @@ class _MonthlyReportState extends State<MonthlyReport> {
 
               ///`************************************************`///
               SizedBox(
-                height: 20,
+                height: 40,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -208,29 +211,52 @@ class _MonthlyReportState extends State<MonthlyReport> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('No. of dogs fed', style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        width: 100,
-                        height: 30,
-                        decoration: BoxDecoration(border: Border.all()),
-                        child: Text(
-                          dogCount.toString(),
-                          style: TextStyle(fontSize: 15),
+                      Text(
+                        'No. of dogs fed',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Text('Total Amount Spent',
-                          style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
                       SizedBox(
                         height: 5,
                       ),
                       Container(
-                        width: 100,
-                        height: 30,
-                        decoration: BoxDecoration(border: Border.all()),
+                        padding: EdgeInsets.fromLTRB(5.0, 4.0, 5.0, 4.0),
+                        alignment: Alignment.centerLeft,
+                        width: 140,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF2F2F2),
+                          borderRadius: BorderRadius.circular(7.0),
+                          border: Border.all(),
+                        ),
+                        child: Text(
+                          dogCount.toString(),
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text('Total Amount Spent',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold)),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(5.0, 4.0, 5.0, 4.0),
+                        alignment: Alignment.centerLeft,
+                        width: 140,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF2F2F2),
+                          borderRadius: BorderRadius.circular(7.0),
+                          border: Border.all(),
+                        ),
                         child: Text(
                           amount.toString() + "/-",
                           style: TextStyle(fontSize: 15),
@@ -238,14 +264,21 @@ class _MonthlyReportState extends State<MonthlyReport> {
                       ),
                       SizedBox(height: 20),
                       Text('Volunteers Involved',
-                          style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold)),
                       SizedBox(
                         height: 5,
                       ),
                       Container(
-                        width: 100,
-                        height: 30,
-                        decoration: BoxDecoration(border: Border.all()),
+                        padding: EdgeInsets.fromLTRB(5.0, 4.0, 5.0, 4.0),
+                        alignment: Alignment.centerLeft,
+                        width: 140,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF2F2F2),
+                          borderRadius: BorderRadius.circular(7.0),
+                          border: Border.all(),
+                        ),
                         child: Text(
                           users.length.toString(),
                           style: TextStyle(fontSize: 15),
@@ -254,12 +287,16 @@ class _MonthlyReportState extends State<MonthlyReport> {
                     ],
                   ),
                   SizedBox(
-                    width: 10,
+                    width: 30,
                   ),
                   Container(
                     height: 250,
                     width: 150,
-                    decoration: BoxDecoration(border: Border.all()),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF2F2F2),
+                      borderRadius: BorderRadius.circular(7.0),
+                      border: Border.all(),
+                    ),
                     child: ListView.separated(
                       padding: const EdgeInsets.all(2),
                       itemCount: users.length,
@@ -267,7 +304,7 @@ class _MonthlyReportState extends State<MonthlyReport> {
                         return Container(
                           height: 30,
                           child: Center(
-                              child: Text('user with id: ${users[index]}')),
+                              child: Text('User with ID: ${users[index]}')),
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) =>
@@ -275,7 +312,20 @@ class _MonthlyReportState extends State<MonthlyReport> {
                     ),
                   )
                 ],
-              )
+              ),
+              SizedBox(
+                height: 110,
+              ),
+              Center(
+                child: Text(
+                  "\"A dog doesn\'t care if you\'re rich or poor, \neducated or illiterate, clever or dull.\nGive him your heart and he will give you his.\"",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic),
+                ),
+              ),
             ],
           ),
         ),
