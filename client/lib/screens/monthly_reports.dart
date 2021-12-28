@@ -265,7 +265,7 @@ class _MonthlyReportState extends State<MonthlyReport> {
                       SizedBox(height: 20),
                       Text('Volunteers Involved',
                           style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold)),
+                              fontSize: 15, fontWeight: FontWeight.bold,),),
                       SizedBox(
                         height: 5,
                       ),

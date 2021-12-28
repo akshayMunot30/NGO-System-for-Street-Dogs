@@ -162,7 +162,7 @@ class _AdminLoginState extends State<AdminLogin> {
                   ),
 
                   SizedBox(
-                    height: 80,
+                    height: 120,
                   ),
                   Text(
                     "\"LOTS OF PEOPLE TALK TO ANIMALS,\nBUT NOT MANY LISTEN THOUGH,\nAND THAT'S THE PROBLEM\"",

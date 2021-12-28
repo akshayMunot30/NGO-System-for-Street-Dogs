@@ -1,10 +1,13 @@
-# your_app_name
+# Stay Dogs
 
-A new Flutter project.
+Stay Dogs is an app for stray dogs. 
+It has been found that, majority of the street dogs become aggressive due to lack of proper feeding and care. This results in their reprimand by Municipality and further torture on them.
+Stay Dogs aims at helping the dogs by feeding them daily.
 
-## Getting Started
+The volunteers are assigned different localities in which they feed the local street dogs. The enlisted volunteers submit records of details like how many dogs were fed, amount spent, additional observations like birth to puppies, or injured dogs etc. 
 
-This project is a starting point for a Flutter application.
+The organizers are able to add new localities, enlist new volunteers and admins and generate monthly reports. As it is an institutional app, maximum operations are under admin side, and volunteer side have dedicated tasks like adding records only.
+
 
 A few resources to get you started if this is your first Flutter project:
 
